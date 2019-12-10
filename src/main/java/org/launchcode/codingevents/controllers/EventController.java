@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -14,11 +15,14 @@ public class EventController {
 
     @GetMapping
     public String displayAllEvents(Model model) {
-        List<String> events = new ArrayList<>();
-        events.add("Code With Pride");
-        events.add("Strange Loop");
-        events.add("Apple WWDC");
-        events.add("SpringOne Platform");
+//        List<String> events = new ArrayList<>();
+//        events.add("Code With Pride");
+//        events.add("Strange Loop");
+//        events.add("Apple WWDC");
+//        events.add("SpringOne Platform");
+        HashMap<String, String> events = new HashMap<>();
+        events.put("Coding", "A coding event");
+        events.put("More Coding", "Another coding event");
         model.addAttribute("events", events);
         return "events/index";
     }

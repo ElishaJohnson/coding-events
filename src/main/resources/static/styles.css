@@ -1,0 +1,13 @@
+.event {
+    text-align: left;
+    size: 25%;
+}
+
+.description {
+    text-align: left;
+}
+
+.location {
+    text-align: right;
+    size: 25%;
+}
