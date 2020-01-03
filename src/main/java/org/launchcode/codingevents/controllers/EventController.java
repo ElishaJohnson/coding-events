@@ -19,11 +19,6 @@ public class EventController {
 
     @GetMapping
     public String displayAllEvents(Model model) {
-//        List<String> events = new ArrayList<>();
-//        events.add("Code With Pride");
-//        events.add("Strange Loop");
-//        events.add("Apple WWDC");
-//        events.add("SpringOne Platform");
         model.addAttribute("events", events);
         return "events/index";
     }
@@ -36,8 +31,8 @@ public class EventController {
 
     // lives at /events/create
     @PostMapping("create")
-    public String createEvent(@RequestParam String eventName) {
-        events.add(new Event(eventName));
+    public String createEvent(@RequestParam String eventName, @RequestParam String eventDescription) {
+        events.add(new Event(eventName, eventDescription));
         return "redirect:/events";
     }
 }
