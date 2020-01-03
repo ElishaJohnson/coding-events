@@ -19,6 +19,11 @@
             <input type="text" name="description" class="form-control" th:value="${event.description}">
         </label>
     </div>
+    <div class="form-group">
+        <label>Email
+            <input type="text" name="contactEmail" class="form-control">
+        </label>
+    </div>
     <input type="hidden" th:value="${event.id}" name="eventId" />
     <div class="form-group">
         <input type="submit" value="Update Event Info" class="btn btn-success">

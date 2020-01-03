@@ -4,8 +4,10 @@ import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +29,11 @@ public class EventController {
 
     // lives at /events/create
     @PostMapping("create")
-    public String createEvent(@ModelAttribute Event newEvent) {
+    public String createEvent(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
+        if(errors.hasErrors()) {
+            model.addAttribute("errorMsg", "Bad data!");
+            return "events/create";
+        }
         EventData.add(newEvent);
         return "redirect:";
     }
@@ -55,8 +61,8 @@ public class EventController {
     }
 
     @PostMapping("edit")
-    public String processEditForm(@RequestParam int eventId, @RequestParam String name, @RequestParam String description) {
-        EventData.update(eventId, name, description);
+    public String processEditForm(@RequestParam int eventId, @RequestParam String name, @RequestParam String description, @RequestParam String contactEmail) {
+        EventData.update(eventId, name, description, contactEmail);
         return "redirect:";
     }
 }
