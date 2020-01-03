@@ -13,14 +13,17 @@
 <table class="table table-striped">
     <thead>
     <tr>
+        <th>Event ID</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Contact E-Mail</th>
     </tr>
     </thead>
     <tr th:each="event : ${events}">
         <td th:text="${event.id}"></td>
         <td th:text="${event.name}"></td>
         <td th:text="${event.description}"></td>
+        <td th:text="${event.contactEmail"></td>
         <td>
             <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
         </td>
