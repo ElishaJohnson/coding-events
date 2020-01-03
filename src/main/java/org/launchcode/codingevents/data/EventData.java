@@ -26,4 +26,10 @@ public class EventData {
     public static void remove(int id) {
         events.remove(id);
     }
+
+    public static void update(int id, String name, String description) {
+        events.get(id).setName(name);
+        events.get(id).setDescription(description);
+    }
+
 }
