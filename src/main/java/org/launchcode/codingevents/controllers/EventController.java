@@ -30,11 +30,11 @@ public class EventController {
 
     // lives at /events/create
     @PostMapping("create")
-    public String createEvent(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
+    public String createEvent(@ModelAttribute @Valid Event newEvent, Errors errors) {
         if(errors.hasErrors()) {
             return "events/create";
         }
-        EventData.add(newEvent);
+        EventData.add(new Event(newEvent.getName(), newEvent.getDescription(), newEvent.getContactEmail()));
         return "redirect:";
     }
 
@@ -57,12 +57,17 @@ public class EventController {
     @GetMapping(path = "edit/{eventId}")
     public String displayEditForm(Model model, @PathVariable int eventId) {
         model.addAttribute("event", EventData.getById(eventId));
+        model.addAttribute("eventId", eventId);
         return "events/edit";
     }
 
     @PostMapping("edit")
-    public String processEditForm(@RequestParam int eventId, @RequestParam String name, @RequestParam String description, @RequestParam String contactEmail) {
-        EventData.update(eventId, name, description, contactEmail);
+    public String processEditForm(@ModelAttribute @Valid Event event, Errors errors, @RequestParam int eventId, Model model) {
+        if(errors.hasErrors()) {
+            model.addAttribute("eventId", eventId);
+            return "events/edit";
+        }
+        EventData.update(event, eventId);
         return "redirect:";
     }
 }

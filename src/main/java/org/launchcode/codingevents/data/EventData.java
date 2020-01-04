@@ -27,10 +27,10 @@ public class EventData {
         events.remove(id);
     }
 
-    public static void update(int id, String name, String description, String contactEmail) {
-        events.get(id).setName(name);
-        events.get(id).setDescription(description);
-        events.get(id).setContactEmail(contactEmail);
+    public static void update(Event event, int id) {
+        events.get(id).setName(event.getName());
+        events.get(id).setDescription(event.getDescription());
+        events.get(id).setContactEmail(event.getContactEmail());
     }
 
 }
