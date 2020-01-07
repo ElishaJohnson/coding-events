@@ -25,16 +25,24 @@ public class EventController {
     @GetMapping("create")
     public String renderCreateEventForm(Model model) {
         model.addAttribute(new Event());
-        return "events/create";
+        model.addAttribute("formType", "Create Event");
+        model.addAttribute("target", "/events/create");
+        return "events/form";
     }
 
     // lives at /events/create
     @PostMapping("create")
-    public String createEvent(@ModelAttribute @Valid Event newEvent, Errors errors) {
+    public String createEvent(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
         if(errors.hasErrors()) {
-            return "events/create";
+            model.addAttribute("formType", "Create Event");
+            return "events/form";
         }
-        EventData.add(new Event(newEvent.getName(), newEvent.getDescription(), newEvent.getContactEmail()));
+        EventData.add(new Event(newEvent.getName(),
+                newEvent.getDescription(),
+                newEvent.getLocation(),
+                newEvent.getContactEmail(),
+                newEvent.getAttendees(),
+                newEvent.isRegistrationRequired()));
         return "redirect:";
     }
 
@@ -58,14 +66,17 @@ public class EventController {
     public String displayEditForm(Model model, @PathVariable int eventId) {
         model.addAttribute("event", EventData.getById(eventId));
         model.addAttribute("eventId", eventId);
-        return "events/edit";
+        model.addAttribute("formType", "Update Event Info");
+        model.addAttribute("target", "/events/edit");
+        return "events/form";
     }
 
     @PostMapping("edit")
     public String processEditForm(@ModelAttribute @Valid Event event, Errors errors, @RequestParam int eventId, Model model) {
         if(errors.hasErrors()) {
             model.addAttribute("eventId", eventId);
-            return "events/edit";
+            model.addAttribute("formType", "Update Event Info");
+            return "events/form";
         }
         EventData.update(event, eventId);
         return "redirect:";

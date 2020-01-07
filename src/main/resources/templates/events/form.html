@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+<h1 th:text="${formType}"></h1>
+<h3 th:if="${formType == 'Update Event Info'}" th:text="${event.name} + ' (id=' + ${eventId} + ')'"></h3>
+<nav th:replace="fragments :: navigation"></nav>
+<form method="post" th:action="${target}">
+    <div class="form-group">
+        <label>Name
+            <input th:field="${event.name}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.name}"></p>
+    </div>
+    <div class="form-group">
+        <label>Description
+            <input th:field="${event.description}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.description}"></p>
+    </div>
+    <div class="form-group">
+        <label>Location
+            <input th:field="${event.location}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.location}"></p>
+    </div>
+    <div class="form-group">
+        <label>Email
+            <input type="email" th:field="${event.contactEmail}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.contactEmail}"></p>
+    </div>
+    <div class="form-group">
+        <label>Number of Attendees
+            <input type="number" required="required" th:field="${event.attendees}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.attendees}"></p>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" th:field="${event.registrationRequired}">
+        <label class="form-check-label">Registration Required</label>
+        <p class="error" th:errors="${event.registrationRequired}"></p>
+    </div>
+    <input th:if="${formType == 'Update Event Info'}" type="hidden" th:value="${eventId}" name="eventId">
+    <div class="form-group">
+        <input type="submit" th:value="${formType}" class="btn btn-success">
+    </div>
+</form>
+</body>
+</html>

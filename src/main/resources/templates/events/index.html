@@ -8,7 +8,7 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<p th:unless="${events} and ${events.size()}">No events!</p>
+<p th:unless="${events} and ${events.size()}" class="error">No events!</p>
 
 <table class="table table-striped">
     <thead>
@@ -16,14 +16,21 @@
         <th>Event ID</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Location</th>
         <th>Contact E-Mail</th>
+        <th>Number of Attendees</th>
+        <th>Registration Required</th>
     </tr>
     </thead>
     <tr th:each="event : ${events}">
         <td th:text="${event.id}"></td>
         <td th:text="${event.name}"></td>
         <td th:text="${event.description}"></td>
+        <td th:text="${event.location}"></td>
         <td th:text="${event.contactEmail}"></td>
+        <td th:text="${event.attendees}"></td>
+        <td th:if="${event.registrationRequired}" th:text="Yes"></td>
+        <td th:if="${!event.registrationRequired}" th:text="No"></td>
         <td>
             <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
         </td>

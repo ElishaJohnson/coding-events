@@ -11,8 +11,8 @@
 <form method="post">
         <th:block th:each="event : ${events}">
             <div class="form-control">
-                <input type="checkbox" name="eventIds" th:value="${event.id}">
-                <label th:text="${event.name}"></label>
+                <input class="form-check-input" type="checkbox" name="eventIds" th:value="${event.id}">
+                <label class="form-check-label" th:text="${event.name}"></label>
             </div>
         </th:block>
 
