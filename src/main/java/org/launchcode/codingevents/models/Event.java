@@ -12,6 +12,8 @@ public class Event {
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters.")
     private String name;
 
+    private EventType type;
+
     @Size(max = 500, message = "Description too long!")
     private String description;
 
@@ -29,8 +31,9 @@ public class Event {
 //    @AssertTrue(message = "Field must be true")
     private boolean registrationRequired;
 
-    public Event(String name, String description, String location, String contactEmail, int attendees, boolean registrationRequired) {
+    public Event(String name, EventType type, String description, String location, String contactEmail, int attendees, boolean registrationRequired) {
         this.name = name;
+        this.type = type;
         this.description = description;
         this.location = location;
         this.contactEmail = contactEmail;
@@ -49,6 +52,8 @@ public class Event {
         return name;
     }
     public void setName(String name) { this.name = name; }
+    public EventType getType() { return type; }
+    public void setType(EventType type) { this.type = type; }
     public String getDescription() {
         return description;
     }

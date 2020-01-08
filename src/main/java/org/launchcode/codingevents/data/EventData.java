@@ -25,6 +25,7 @@ public class EventData {
 
     public static void update(Event event, int id) {
         events.get(id).setName(event.getName());
+        events.get(id).setType(event.getType());
         events.get(id).setDescription(event.getDescription());
         events.get(id).setLocation(event.getLocation());
         events.get(id).setContactEmail(event.getContactEmail());

@@ -2,6 +2,7 @@ package org.launchcode.codingevents.controllers;
 
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
+import org.launchcode.codingevents.models.EventType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -27,6 +28,7 @@ public class EventController {
         model.addAttribute(new Event());
         model.addAttribute("formType", "Create Event");
         model.addAttribute("target", "/events/create");
+        model.addAttribute("types", EventType.values());
         return "events/form";
     }
 
@@ -38,6 +40,7 @@ public class EventController {
             return "events/form";
         }
         EventData.add(new Event(newEvent.getName(),
+                newEvent.getType(),
                 newEvent.getDescription(),
                 newEvent.getLocation(),
                 newEvent.getContactEmail(),
@@ -68,6 +71,7 @@ public class EventController {
         model.addAttribute("eventId", eventId);
         model.addAttribute("formType", "Update Event Info");
         model.addAttribute("target", "/events/edit");
+        model.addAttribute("types", EventType.values());
         return "events/form";
     }
 
