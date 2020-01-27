@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.*;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 public class Event {
@@ -89,4 +90,5 @@ public class Event {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }
