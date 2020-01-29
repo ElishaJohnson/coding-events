@@ -82,6 +82,7 @@ public class EventController {
         if(errors.hasErrors()) {
             model.addAttribute("eventId", eventId);
             model.addAttribute("formType", "Update Event Info");
+            model.addAttribute("categories", eventCategoryRepository.findAll());
             return "events/form";
         }
         eventRepository.save(event);
