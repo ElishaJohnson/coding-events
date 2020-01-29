@@ -27,32 +27,32 @@
     </div>
     <div class="form-group">
         <label>Description
-            <input th:field="${event.description}" class="form-control">
+            <input th:field="${event.eventDetails.description}" class="form-control">
         </label>
-        <p class="error" th:errors="${event.description}"></p>
+        <p class="error" th:errors="${event.eventDetails.description}"></p>
     </div>
     <div class="form-group">
         <label>Location
-            <input th:field="${event.location}" class="form-control">
+            <input th:field="${event.eventDetails.location}" class="form-control">
         </label>
-        <p class="error" th:errors="${event.location}"></p>
+        <p class="error" th:errors="${event.eventDetails.location}"></p>
     </div>
     <div class="form-group">
         <label>Email
-            <input type="email" th:field="${event.contactEmail}" class="form-control">
+            <input type="email" th:field="${event.eventDetails.contactEmail}" class="form-control">
         </label>
-        <p class="error" th:errors="${event.contactEmail}"></p>
+        <p class="error" th:errors="${event.eventDetails.contactEmail}"></p>
     </div>
     <div class="form-group">
         <label>Number of Attendees
-            <input type="number" required="required" th:field="${event.attendees}" class="form-control">
+            <input type="number" required="required" th:field="${event.eventDetails.attendees}" class="form-control">
         </label>
-        <p class="error" th:errors="${event.attendees}"></p>
+        <p class="error" th:errors="${event.eventDetails.attendees}"></p>
     </div>
     <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" th:field="${event.registrationRequired}">
+        <input type="checkbox" class="form-check-input" th:field="${event.eventDetails.registrationRequired}">
         <label class="form-check-label">Registration Required</label>
-        <p class="error" th:errors="${event.registrationRequired}"></p>
+        <p class="error" th:errors="${event.eventDetails.registrationRequired}"></p>
     </div>
     <input th:if="${formType == 'Update Event Info'}" type="hidden" th:value="${eventId}" name="eventId">
     <div class="form-group">
