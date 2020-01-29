@@ -1,18 +1,18 @@
 package org.launchcode.codingevents.models;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
 @Entity
 public class Event extends AbstractEntity {
 
-
-
     @NotBlank(message = "Name is required.")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters.")
     private String name;
 
-    private int categoryId;
+    @ManyToOne
+    @NotNull(message = "Category is required.")
+    private EventCategory eventCategory;
 
     @Size(max = 500, message = "Description too long!")
     private String description;
@@ -31,9 +31,9 @@ public class Event extends AbstractEntity {
 //    @AssertTrue(message = "Field must be true")
     private boolean registrationRequired;
 
-    public Event(String name, int categoryId, String description, String location, String contactEmail, int attendees, boolean registrationRequired) {
+    public Event(String name, EventCategory eventCategory, String description, String location, String contactEmail, int attendees, boolean registrationRequired) {
         this.name = name;
-        this.categoryId = categoryId;
+        this.eventCategory = eventCategory;
         this.description = description;
         this.location = location;
         this.contactEmail = contactEmail;
@@ -47,8 +47,8 @@ public class Event extends AbstractEntity {
         return name;
     }
     public void setName(String name) { this.name = name; }
-    public int getCategoryId() { return categoryId; }
-    public void setCategoryId(int categoryId) { this.categoryId = categoryId; }
+    public EventCategory getEventCategory() { return eventCategory; }
+    public void setEventCategory(EventCategory eventCategory) { this.eventCategory = eventCategory; }
     public String getDescription() {
         return description;
     }
@@ -68,7 +68,5 @@ public class Event extends AbstractEntity {
     public String toString() {
         return name;
     }
-
-
 
 }
