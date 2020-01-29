@@ -3,6 +3,8 @@ package org.launchcode.codingevents.models;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Event extends AbstractEntity {
@@ -27,6 +29,9 @@ public class Event extends AbstractEntity {
     @NotNull
     private EventDetails eventDetails;
 
+    @ManyToMany
+    private final List<Tag> tags = new ArrayList<>();
+
     public String getName() {
         return name;
     }
@@ -35,6 +40,8 @@ public class Event extends AbstractEntity {
     public void setEventCategory(EventCategory eventCategory) { this.eventCategory = eventCategory; }
     public EventDetails getEventDetails() { return eventDetails; }
     public void setEventDetails(EventDetails eventDetails) { this.eventDetails = eventDetails; }
+    public List<Tag> getTags() { return tags; }
+    public void addTag(Tag tag) { this.tags.add(tag); }
 
     @Override
     public String toString() {
