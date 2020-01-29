@@ -2,22 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
+<body class = "container">
 
 <h1 th:text="${title}"></h1>
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<p th:unless="${events} and ${events.size()}" class="error">No events!</p>
+<p th:unless="${tags} and ${tags.size()}" class="error">No event tags!</p>
 
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>Event Name</th>
+        <th>Tag Name</th>
     </tr>
     </thead>
-    <tr th:each="event : ${events}">
-        <td><a th:text="${event.name}" th:href="'/events/details/?eventId=' + ${event.id}"></a></td>
+    <tr th:each="tag : ${tags}">
+        <td><a th:text="${tag.displayName}" th:href="'events?tagId=' + ${tag.id}"></a></td>
     </tr>
 </table>
 
