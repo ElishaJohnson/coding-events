@@ -6,6 +6,7 @@
 <h1 th:text="${formType}"></h1>
 <h3 th:if="${formType == 'Update Event Info'}" th:text="${event.name} + ' (id=' + ${eventId} + ')'"></h3>
 <nav th:replace="fragments :: navigation"></nav>
+
 <form method="post" th:action="${target}">
     <div class="form-group">
         <label>Name
@@ -15,8 +16,8 @@
     </div>
     <div class="form-group">
         <label>Type
-        <select th:field="${event.type}">
-            <option th:each="type : ${types}" th:value="${type}" th:text="${type.displayName}"></option>
+        <select th:field="${event.categoryId}">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
         </select>
         </label>
     </div>

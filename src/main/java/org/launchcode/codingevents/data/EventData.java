@@ -1,7 +1,6 @@
 package org.launchcode.codingevents.data;
 
 import org.launchcode.codingevents.models.Event;
-import org.w3c.dom.html.HTMLQuoteElement;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -25,7 +24,7 @@ public class EventData {
 
     public static void update(Event event, int id) {
         events.get(id).setName(event.getName());
-        events.get(id).setType(event.getType());
+        events.get(id).setCategoryId(event.getCategoryId());
         events.get(id).setDescription(event.getDescription());
         events.get(id).setLocation(event.getLocation());
         events.get(id).setContactEmail(event.getContactEmail());

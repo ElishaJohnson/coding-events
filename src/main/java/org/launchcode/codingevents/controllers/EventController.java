@@ -2,6 +2,7 @@ package org.launchcode.codingevents.controllers;
 
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.data.EventRepository;
+import org.launchcode.codingevents.data.EventCategoryRepository;
 import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.models.EventType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,13 @@ public class EventController {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private EventCategoryRepository eventCategoryRepository;
+
     @GetMapping
     public String displayAllEvents(Model model) {
         model.addAttribute("events", eventRepository.findAll());
+        model.addAttribute("categories", eventCategoryRepository.findAll());
         return "events/index";
     }
 
@@ -34,7 +39,7 @@ public class EventController {
         model.addAttribute(new Event());
         model.addAttribute("formType", "Create Event");
         model.addAttribute("target", "/events/create");
-        model.addAttribute("types", EventType.values());
+        model.addAttribute("categories", eventCategoryRepository.findAll());
         return "events/form";
     }
 
@@ -43,6 +48,7 @@ public class EventController {
     public String createEvent(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
         if(errors.hasErrors()) {
             model.addAttribute("formType", "Create Event");
+            model.addAttribute("categories", eventCategoryRepository.findAll());
             return "events/form";
         }
         eventRepository.save(newEvent);
@@ -72,7 +78,7 @@ public class EventController {
         model.addAttribute("eventId", eventId);
         model.addAttribute("formType", "Update Event Info");
         model.addAttribute("target", "/events/edit");
-        model.addAttribute("types", EventType.values());
+        model.addAttribute("categories", eventCategoryRepository.findAll());
         return "events/form";
     }
 
